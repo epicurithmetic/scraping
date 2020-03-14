@@ -41,7 +41,7 @@ def genius_song_names(song_list):
     song_name = song_name.replace(")","")
     song_name = song_name.replace(",","")
     song_name = song_name.replace(".","")
-    song_name = song_name.replace(" - "," ")    
+    song_name = song_name.replace(" - "," ")
     return song_name
 
 #### Scraping code starts here.
@@ -127,12 +127,12 @@ while more_lyrics == True:
         # Set file name.
         file_name = genre + "/"+ album_name_url + str(album_tracklist.index(song)) + ".txt"
 
-        # Write the lyrics to the file.
-        lyrics_text_file = open(file_name,"w")
-        lyrics_text_file.write(lyrics)
-        lyrics_text_file.close()
-        print('Lyrics written to file.')
-        print('Next song is...\n')
+        # # Write the lyrics to the file.
+        # lyrics_text_file = open(file_name,"w")
+        # lyrics_text_file.write(lyrics)
+        # lyrics_text_file.close()
+        # print('Lyrics written to file.')
+        # print('Next song is...\n')
 
     print('All done.')
 
