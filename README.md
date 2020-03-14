@@ -2,7 +2,7 @@
 
 As part of a project for a linguistics course (DIGI405) at the University of Canterbury I had to build a corpus of text to analyse using the methods taught in the class: these methods come under the heading "Corpus Linguistics".
 
-My (dream) project would have me analyse: key topics of single artists; key topics of genres; and also try to uncover some differences between arists and genres. 
+My (dream) project would have me analyse: key topics of single artists; key topics of genres; and also try to uncover some differences in the use of language between arists and between genres. 
  
 At the moment this repository is *unedited/unoptimized stream-of-consciousness* code. 
 
