@@ -60,7 +60,7 @@ def genius_song_lyrics(artist, album):
 
     # Visit the URL and scrape the lyrics, storing them in a list.
     lyrics_list = []
-    
+
     for link in song_url_list:
         # Get the HTML for the song page.
         response_song = requests.get(link)
@@ -72,7 +72,16 @@ def genius_song_lyrics(artist, album):
     print("Lyrics obtained.")
 
     # Now we need to write the lyrics to .txt files.
+    i = 1
+    for song in lyrics_list:
+        file_name = artist + "-" + album + str(i) + ".txt"
+        lyrics_text_file = open(file_name, "w")
+        lyrics_text_file.write(song)
+        lyrics_text_file.close()
 
-    return lyrics_list
+        # Counter to change file name for each song.
+        i+=1
+
+    return "Job done."
 
 print(genius_song_lyrics("disturbed","ten thousand fists"))
