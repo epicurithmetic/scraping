@@ -98,14 +98,14 @@ def genius_song_lyrics(artist, album):
 
 # Write some code to interact with the user to ask for artist names
 # and album names to download the lyrics of.
-done = False:
+done = False
 
 while done == False:
     print("Which artist would you like to get lyrics of?")
     artist_name = input("")
-    print("Which album by " + arist_name + " do you want the lyrics of?")
+    print("Which album by " + artist_name + " do you want the lyrics of?")
     album_name = input("")
-    print("Okay I will get the lyrics on " + album_name)
+    print("Okay I will get the lyrics on " + album_name + ".")
     # Get the lyrics.
     genius_song_lyrics(artist_name,album_name)
 
