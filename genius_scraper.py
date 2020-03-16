@@ -1,59 +1,78 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Define the url in question
-url = "https://genius.com/Disturbed-stricken-lyrics"
+def genius_song_lyrics(artist, album):
 
-# Define an object to store the HTML
-response = requests.get(url)
 
-# Put HTML through BeautifulSoup to make it nicer to parse.
-soup = BeautifulSoup(response.text, "html.parser")
+    """
+        This function takes as input two strings:
 
-# Find the title of the page.
-title = soup.title
-title = title.get_text()
-print(title)
+            arist = name of the artist
+            album = name of the album of which the lyrics are sought
 
-#stories = soup.find_all('li', class_='o-digest')
-lyrics = soup.find(class_="lyrics")
-print(lyrics.text)
+        First the function builds the url based on the manner in which
+        genius.com designs their urls for albums. This has to take into account
+        their choices for dealing with things like:
 
-# def genius_song_lyrics(artist, song):
-#
-#
-#     """
-#         This function takes as input two strings:
-#
-#             arist = name of the artist
-#             song = name of song of which the lyrics are sought
-#
-#         First the function builds the url based on the manner in which
-#         genius.com designs their urls for songs. This has to take into account
-#         their choices for dealing with things like:
-#
-#             There are is no punctutation in the url i.e. none of:
-#                         ',().
-#                     These are simply ignored when building the url.
-#
-#             & in the song name goes to "and" in the url
-#
-#             Any mention of (Ft. ), Featuring etc. does not appear in the url.
-#
-#     """
+            There are is no punctutation in the url i.e. none of:
+                        ',().
+                    These are simply ignored when building the url.
 
-# Try to obtain the list of song names from the album page.
-url_album = "https://genius.com/albums/Disturbed/Ten-thousand-fists"
-response_album = requests.get(url_album)
-soup_album = BeautifulSoup(response_album.text, "html.parser")
+            & in the name goes to "and" in the url
 
-songs = soup_album.find_all("h3", class_="chart_row-content-title")
-# for song in songs:
-#     print(song.text)
+        After storing the lyrics, this function writes them into individual
+        .txt files in the same directory that the code is stored.
 
-# Rather than build the url according to the song name and accounting for
-# the design style of the website. I can just grab the url from the HTML!
-song_url_data = (soup_album.find_all("a", class_="u-display_block"))
-song_url_list = []
-for link in song_url_data:
-    song_url_list.append(link['href'])
+
+
+    """
+
+    # Firt the names of the artist and album have to be reformatted in order
+    # to suit the design style of genius.com URLs.
+    artist = str(artist)
+    artist = artist.replace(" ","-")
+    artist = artist.replace("(","")
+    artist = artist.replace(")","")
+    artist = artist.replace("'","")
+    artist = artist.replace(",","")
+    artist = artist.replace("&","and")
+
+    album = str(album)
+    album = album.replace(" ","-")
+    album = album.replace("(","")
+    album = album.replace(")","")
+    album = album.replace("'","")
+    album = album.replace(",","")
+    album = album.replace("&","and")
+
+    # Construct the url.
+    url_album = "https://genius.com/albums/" + artist + "/" + album
+
+    # Access the website and get the HTML.
+    response_album = requests.get(url_album)
+    soup_album = BeautifulSoup(response_album.text, "html.parser")
+
+    # Pick out the list of URLs for the songs on the album.
+    song_url_data = (soup_album.find_all("a", class_="u-display_block"))
+    song_url_list = []
+    for link in song_url_data:
+        song_url_list.append(link['href'])
+
+    # Visit the URL and scrape the lyrics, storing them in a list.
+    lyrics_list = []
+    
+    for link in song_url_list:
+        # Get the HTML for the song page.
+        response_song = requests.get(link)
+        soup_song = BeautifulSoup(response_song.text, 'html.parser')
+        # Pull the lyrics.
+        lyrics = soup_song.find(class_="lyrics")
+        lyrics_list.append(lyrics.text)
+
+    print("Lyrics obtained.")
+
+    # Now we need to write the lyrics to .txt files.
+
+    return lyrics_list
+
+print(genius_song_lyrics("disturbed","ten thousand fists"))
