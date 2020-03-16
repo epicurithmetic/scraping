@@ -61,7 +61,18 @@ def genius_song_lyrics(artist, album):
     # Visit the URL and scrape the lyrics, storing them in a list.
     lyrics_list = []
 
+    # Custom loading bar parameters.
+    # L = len(song_url_data)
+    # progress = 1
+
     for link in song_url_list:
+
+        # Loading bar code.
+        # dash = int(L//progress)
+        # hash = 10 - dash
+        # print("Loading: [" + hash*"#" + dash*"-" + "]", flush = True)
+        # progress += 1
+
         # Get the HTML for the song page.
         response_song = requests.get(link)
         soup_song = BeautifulSoup(response_song.text, 'html.parser')
@@ -84,4 +95,24 @@ def genius_song_lyrics(artist, album):
 
     return "Job done."
 
-print(genius_song_lyrics("disturbed","ten thousand fists"))
+
+# Write some code to interact with the user to ask for artist names
+# and album names to download the lyrics of.
+done = False:
+
+while done == False:
+    print("Which artist would you like to get lyrics of?")
+    artist_name = input("")
+    print("Which album by " + arist_name + " do you want the lyrics of?")
+    album_name = input("")
+    print("Okay I will get the lyrics on " + album_name)
+    # Get the lyrics.
+    genius_song_lyrics(artist_name,album_name)
+
+    print("Would you like some more lyrics? (Y/n)")
+    answer = input("")
+
+    if answer == "Y":
+        pass
+    else:
+        done = True
