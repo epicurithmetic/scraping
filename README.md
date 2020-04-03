@@ -1,4 +1,12 @@
-### Scraping for data on genius.com 
+### Scraping data from Quanta Magazine
+
+ *Project in planning*
+
+### Scraping data from Radio New Zealand
+ 
+ *Project in planning*
+ 
+### Scraping data from genius.com
 
 As part of a project for a data science/linguistics course (DIGI405) at the University of Canterbury, I had to build a corpus of text to analyse using the methods taught in the class: these methods come under the heading "Corpus Linguistics".
 
@@ -8,8 +16,4 @@ In order to do this project I need to gather vast amounts of lyrics from a wide 
  
 At the moment this repository is *unedited/unoptimized stream-of-consciousness* code. 
 
----
 
-#### What is in this repository? 
-
-This repository contains the code (that I am continuing to work on) for scraping the website genius.com for lyrics. Broadly speaking, once given an artist name and album, the code can (or will be able to) save a .txt file with the lyrics of the song. 
