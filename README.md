@@ -6,6 +6,10 @@
  
  *Project in planning*
  
+### Scraping data from Bandcamp
+ 
+ *Project in planning*
+ 
 ### Scraping data from genius.com
 
 As part of a project for a data science/linguistics course (DIGI405) at the University of Canterbury, I had to build a corpus of text to analyse using the methods taught in the class: these methods come under the heading "Corpus Linguistics".
