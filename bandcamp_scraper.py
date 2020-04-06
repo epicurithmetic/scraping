@@ -1,9 +1,36 @@
 # This code finds the name of the latest releases from by favourite artists and
 # record labels on bandcamp.
-
+import os
 import requests
 from bs4 import BeautifulSoup
 
+arist_list = ["Ultimae",
+              "Synphaera",
+              "Exosphere",
+              "White Label Records",
+              "Carbon Based Lifeforms",
+              "Hydrangea",
+              "Abul Mogard",
+              "Faint",
+              "Solar Fields",
+              "Trentemoller",
+              "Alfa Mist"]
+
+# Read in the data from the last time we checked.
+N = len(arist_list)
+bandcamp_old_release_data = []
+bandcamp_database = open("bandcamp_database.txt","r")
+
+for i in range(0,N):
+    data = bandcamp_database.readline()
+    data_list = data.split(":& ")
+    release_name = data_list[1].replace("\n","")    # Cleans the EOL command.
+    bandcamp_old_release_data.append(release_name)
+
+# Close the file.
+bandcamp_database.close()
+
+# Now we can obtain the current release information.
 def bandcamp_latest_release(url):
 
     url_artist_discog = url
@@ -59,11 +86,29 @@ def release_name_clean(raw_release_name):
 
     return clean_release_name
 
+# This does the work to get the new information.
 newest_releases = []
-
 for url in bandcamp_list:
     raw_release_title = bandcamp_latest_release(url)
     clean_release_title = release_name_clean(raw_release_title)
     newest_releases.append(clean_release_title)
 
-print(newest_releases)
+for i in range(0,N):
+
+    if newest_releases[i] == bandcamp_old_release_data[i]:
+        print(" "*10 + arist_list[i] +": " + newest_releases[i])
+    else:
+        print(" "*10 + arist_list[i] +": " + newest_releases[i] + " [New!]")
+
+# Now we can update the database with the new release information.
+file = open("bandcamp_database.txt","w")
+for i in range(0,N):
+    if i == 0:
+        new_data = arist_list[i] + ":& " + newest_releases[i]
+        file.write(new_data)
+    else:
+        new_data = "\n" + arist_list[i] + ":& " + newest_releases[i]
+        file.write(new_data)
+
+
+file.close()
