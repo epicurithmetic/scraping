@@ -4,12 +4,17 @@ from bs4 import BeautifulSoup
 
 def HHtDL():
 
-    url_HHtDL = "https://www.dalailama.com/"
+    url_HHtDL = "https://www.dalailama.com/news"
     response_HHtDL = requests.get(url_HHtDL)
     soup_HHtDL = BeautifulSoup(response_HHtDL.text, "html.parser")
 
-    latest_entry_title = soup_HHtDL.find("h2").text
-    latest_entry_url = url_HHtDL[:-1] + soup_HHtDL.find("a",class_="button gold")["href"]
+    latest_entry_section = soup_HHtDL.find("div", class_="card")
+    latest_entry_subsection = latest_entry_section.find("h3")
+
+    latest_entry_url_section = latest_entry_subsection.find("a")
+    latest_entry_url = latest_entry_url_section['href']
+    latest_entry_title = latest_entry_subsection.text
+
 
     return [latest_entry_title,latest_entry_url]
 
@@ -27,7 +32,6 @@ def jungianthology():
 
     return [title_blog, url_blog]
 
-
 def myth_matters():
 
     url_mm = "https://mythologymatters.wordpress.com/"
@@ -41,5 +45,3 @@ def myth_matters():
     url_blog = data_mm_finer["href"]
 
     return [title_blog, url_blog]
-
-print(myth_matters())
