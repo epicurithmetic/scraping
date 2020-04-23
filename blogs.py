@@ -11,9 +11,24 @@ def jdh_headline():
     soup_jdh = BeautifulSoup(response_jdh.text, "html.parser")
 
     main_jdh = soup_jdh.find("h1", class_="entry-title")
-    title_jdh = main_jdh.text
+    title_jdh = main_jdh.find("a").text
+    url_blog = main_jdh.find("a")["href"]
 
-    return title_jdh
+    return [title_jdh, url_blog]
+
+# Stephen Wolfram's *writings* blog.
+def wolfram_writings():
+
+    url_wolf = "https://writings.stephenwolfram.com/"
+    response_wolf = requests.get(url_wolf)
+    soup_wolf = BeautifulSoup(response_wolf.text, "html.parser")
+
+    latest_article_data = soup_wolf.find("article").find("a")
+
+    article_title = latest_article_data.text
+    article_url = latest_article_data["href"]
+
+    return [article_title,article_url]
 
 # Matt Baker's blog.
 def baker_headline():
@@ -23,9 +38,10 @@ def baker_headline():
     soup_baker = BeautifulSoup(response_baker.text, "html.parser")
 
     main_baker = soup_baker.find("h1", class_="entry-title")
-    title_baker = main_baker.text
+    title_baker = main_baker.a.text
+    article_url = main_baker.a["href"]
 
-    return title_baker
+    return [title_baker, article_url]
 
 # # Logic Matters
 # def logic_matters():
@@ -56,8 +72,9 @@ def godel_letter():
     # Now pick out the title part of the HTML.
     main_godel = section_godel.find("h2")
     title_godel = main_godel.text
+    article_url = main_godel.find("a")["href"]
 
-    return title_godel
+    return [title_godel,article_url]
 
 # Annoying precision
 def annoying_precision():
@@ -72,8 +89,9 @@ def annoying_precision():
     # Now pick out the title part of the HTML.
     main_annoying_precision = section_annoying_precision.find("h2")
     title_annoying_precision = main_annoying_precision.text
+    article_url = main_annoying_precision.find("a")["href"]
 
-    return title_annoying_precision
+    return [title_annoying_precision,article_url]
 
 # Full stack python (blog)
 def fullstack_python():
