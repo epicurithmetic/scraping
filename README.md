@@ -1,14 +1,6 @@
-### Scraping data from Quanta Magazine
+### Daily Updates
 
- *Project in planning*
-
-### Scraping data from Radio New Zealand
- 
- *Project in planning*
- 
-### Scraping data from Bandcamp
- 
- *Project in planning*
+One thing I miss about Facebook is the newsfeed: all of the things I want to be updated about it one convenient location. So I have written some code of my own which presents all of the latest information from the websites I am interested in. In order to do this, I scrape information from: Quanta Magazine, Bandcamp, OrbMag, blogs, and news websites. This repository contains the code I use to get the information for my daily updates. 
  
 ### Scraping data from genius.com
 
